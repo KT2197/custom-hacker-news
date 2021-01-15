@@ -3,6 +3,12 @@ from bs4 import BeautifulSoup
 from pprint import pprint
 
 def get_custom_hacker_news(num_pages, thresh_votes):
+    """
+    num_pages - required positional argument, specifies number of pages to search the
+    articles in custom hacker news website.
+    thresh_votes - required positional argument, selects articles greater than or equal to
+    the amount specified.
+    """
     custom_hn_list = []
     for page_num in range(1, num_pages + 1):
         response = get('https://news.ycombinator.com/news?p=' + str(page_num))
@@ -14,6 +20,9 @@ def get_custom_hacker_news(num_pages, thresh_votes):
     return custom_hn_list
 
 def create_custom_hacker_news_list(links, subtext, thresh_votes):
+    """
+    crates a filtered list of title, link and score of an article.
+    """
     custom_hn_list = []
     for i, link in enumerate(links):
         score = subtext[i].select('.score')
@@ -24,6 +33,6 @@ def create_custom_hacker_news_list(links, subtext, thresh_votes):
     return custom_hn_list
     
 
-custom_hn = get_custom_hacker_news(2, 100)
+custom_hn = get_custom_hacker_news(2, 100) #
 
 pprint(custom_hn)
